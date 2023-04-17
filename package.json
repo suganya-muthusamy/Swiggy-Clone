@@ -1,0 +1,33 @@
+{
+  "name": "vanakkam-react",
+  "version": "1.0.0",
+  "description": "React from zero to hero",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suganya-muthusamy/Vanakkam-React.git"
+  },
+  "keywords": [
+    "react",
+    "learning",
+    "building App",
+    "scratch"
+  ],
+  "author": "Suganya Muthusamy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suganya-muthusamy/Vanakkam-React/issues"
+  },
+  "homepage": "https://github.com/suganya-muthusamy/Vanakkam-React#readme",
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist":["last 2 versions"]
+}

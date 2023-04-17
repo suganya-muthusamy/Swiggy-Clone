@@ -25,13 +25,13 @@
         rootElement.appendChild(heading)
     </script>
 
-    <!-- React CDN -->
-    <div id="root"></div>
+    <h1>Before root</h1>
+    <div id="root">
+        <h1>Hi there! I am Suganya here!</h1> 
+    </div>
+    <h1>After root</h1>
 
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-    <script src="./App.js"></script>
+    <script type="module" src="./App.js"></script>
 </body>
 
 </html>
