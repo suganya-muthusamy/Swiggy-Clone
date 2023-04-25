@@ -1,21 +1,35 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
-const headTag = React.createElement("div", {id:"parent"}, 
-                [React.createElement("div", {id:"child1"}, 
-                [React.createElement("h1", { className:"headClass"}, "Hello World from nested React 00:h1!"),
-                React.createElement("h2", { className:"headClass"}, "Hello World from nested React 00:h2!")]),
-                React.createElement("div", {id:"child2"}, 
-                [React.createElement("h1", { className:"headClass"}, "Hello World from nested React 01:h1!"),
-                React.createElement("h2", { className:"headClass"}, "Hello World from nested React 01:h2!")])])
+// react element
+const headTag = (
+<h1 className="headClass">Hello from JSX Element</h1>
+)
 
-// const headTag=React.createElement('h1', {
-//     id:"headID", className:"headClass"
-// }, "Hello World from React!")
+// react component
+const Title = () => (
+    <h1 className="headClass">Vanakkam React</h1>
+)
 
-console.log(headTag)    //this will return the object
+// variable
+const text="Functional component";
+
+// functional component
+const Head = () => {
+    return(
+        <div>
+            <h1>Hello from Head component</h1>
+        </div>
+    )
+}
 
 const root=ReactDOM.createRoot(document.getElementById('root'))
+const root1=ReactDOM.createRoot(document.getElementById('root1'))
+const root2=ReactDOM.createRoot(document.getElementById('root2'))
 
-root.render(headTag)    //this will render the headTag into h1 tag
+
+root.render(headTag)
+root1.render(<Title/>)
+root2.render(text)
+
 

@@ -10,27 +10,15 @@
 </head>
 
 <body>
-
-    <!-- Using HTML -->
-    <div id="root1">
-        <h1>Hello World from HTML!</h1>
-    </div>
-    <!-- Using JavaScript -->
-    <div id="root2"></div>
-    <script>
-        const heading= document.createElement("h1")
-        heading.innerHTML="Hello World from JavaScript!"
-
-        const rootElement=document.getElementById("root2")
-        rootElement.appendChild(heading)
-    </script>
-
-    <h1>Before root</h1>
     <div id="root">
-        <h1>Hi there! I am Suganya here!</h1> 
+        <h1>Not Rendered</h1> 
     </div>
-    <h1>After root</h1>
-
+    <div id="root1">
+        <h1>Not Rendered 1</h1> 
+    </div>
+    <div id="root2">
+        <h1>Not Rendered 2</h1> 
+    </div>
     <script type="module" src="./App.js"></script>
 </body>
 
