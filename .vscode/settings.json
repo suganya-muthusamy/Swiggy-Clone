@@ -1,0 +1,10 @@
+{
+    "reactSnippets.settings.prettierEnabled": true,
+    "prettier.arrowParens": "avoid",
+    "prettier.bracketSameLine": true,
+    "prettier.proseWrap": "always",
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": true,
+    "vs-code-prettier-eslint.prettierLast": true,
+    "editor.formatOnSave": true
+}
