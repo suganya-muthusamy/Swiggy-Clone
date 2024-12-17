@@ -11,14 +11,14 @@ const UseresData = () => {
 	const fetchData = async () => {
 		const data = await fetch(RES_DATA_URL);
 		const json = await data.json();
+		console.log("actual data", json.data);
 
 		//optional chaining
-		const JSON_DATA = await json?.data?.cards[5]?.card?.card?.gridElements
+		const JSON_DATA = await json?.data?.cards[4]?.card?.card?.gridElements
 			?.infoWithStyle?.restaurants;
 		setresData(JSON_DATA);
-		console.log("actual data", json);
 	};
-	console.log("fetchData", resdata);
+	// console.log("fetchData", resdata);
 	return resdata;
 };
 

@@ -8,14 +8,15 @@ import { useEffect, useState } from "react";
 const RestaurantMenu = () => {
 	const { resId } = useParams();
 	const resInfo = useRestaurantMenu(resId);
-	const [showIndex, setShowIndex] = useState(null);
+	const [showIndex, setShowIndex] = useState(0);
 
 	if (resInfo == null) return <Shimmer />;
 
+	console.log("resInfo", resInfo);
+
 	const categories =
-		resInfo?.cards?.length == 3
-			? resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-			: resInfo?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+		resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+	console.log("categories", categories);
 
 	const filteredCategories = categories?.filter(c => {
 		return (
@@ -24,10 +25,10 @@ const RestaurantMenu = () => {
 		);
 	});
 
-	console.log(categories);
-	console.log("filtered", filteredCategories);
+	// console.log(categories);
+	// console.log("filtered", filteredCategories);
 	return (
-		<div className="res-menu-container w-full sm:w-8/12 md:w-6/12 m-auto px-4 xl:px-0">
+		<div className="res-menu-container w-full md:w-8/12 m-auto px-4 xl:px-0">
 			<div className="res-info py-4 border-b-2 flex justify-between items-center ">
 				<div>
 					<h1 className="font-bold text-2xl pb-2">
@@ -58,59 +59,20 @@ const RestaurantMenu = () => {
 			<ul>
 				{filteredCategories?.map((category, index) => {
 					return (
-						<li>
+						<li key={category?.card?.card?.title}>
 							<RestaurantCategory
-								key={category?.card?.card?.title}
 								data={category?.card?.card}
-								showItems={index === showIndex ? true : false}
-								setShowItems={() => {
-									setShowIndex(index);
+								isActive={index === showIndex}
+								setShowIndex={() => {
+									setShowIndex(
+										index === showIndex ? null : index
+									);
 								}}
 							/>
 						</li>
 					);
 				})}
 			</ul>
-			{/* <div className="res-menu">
-				<h1 className="text-2xl font-bold py-3">
-					{
-						resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR
-							?.cards[1]?.card?.card?.title
-					}
-					<span className="pl-2">
-						(
-						{
-							resInfo?.cards[2]?.groupedCard?.cardGroupMap
-								?.REGULAR?.cards?.length
-						}
-						)
-					</span>
-				</h1>
-				<ul>
-					{itemCards?.map(item => (
-						<li
-							className="menu-info py-5 border-b-2"
-							key={item?.card?.info?.id}>
-							<div className="flex justify-between">
-								<div className="w-9/12">
-									<h2>{item?.card?.info?.name}</h2>
-									<p>{item?.card?.info?.description}</p>
-									<span>
-										Rs. {item?.card?.info?.price / 100}
-									</span>
-								</div>
-								<img
-									className="w-1/12"
-									src={
-										MENU_ITEM_IMAGE_URL +
-										item?.card?.info?.imageId
-									}
-								/>
-							</div>
-						</li>
-					))}
-				</ul>
-			</div> */}
 		</div>
 	);
 };

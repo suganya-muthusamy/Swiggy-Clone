@@ -1,8 +1,8 @@
 import { useState } from "react";
 import MenuItems from "./MenuItems";
-const RestaurantCategory = ({ data, showItems, setShowItems }) => {
+const RestaurantCategory = ({ data, showIndex, setShowIndex, isActive }) => {
 	const handleClick = () => {
-		setShowItems();
+		setShowIndex();
 	};
 	return (
 		<div className="py-4 border-b-8">
@@ -12,9 +12,9 @@ const RestaurantCategory = ({ data, showItems, setShowItems }) => {
 				<span>
 					{data.title}({data.itemCards.length})
 				</span>
-				<span>{showItems ? "∧" : "∨"}</span>
+				<span>{isActive ? "∧" : "∨"}</span>
 			</div>
-			<div>{showItems && <MenuItems menuItems={data.itemCards} />}</div>
+			<div>{isActive && <MenuItems menuItems={data.itemCards} />}</div>
 		</div>
 	);
 };

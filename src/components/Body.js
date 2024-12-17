@@ -4,13 +4,11 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UseresData from "../utils/useRes";
-import UserContext from "../utils/UserContext";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Body = () => {
 	const [filteredRestaurant, setFilteredRestaurant] = useState(null);
 	const [searchText, setSearchText] = useState("");
-
-	const { name, setUserName } = useContext(UserContext);
 
 	const resdata = UseresData();
 
@@ -25,34 +23,46 @@ const Body = () => {
 	if (onlineStatus == false) return <h1>You are offline</h1>;
 
 	console.log("body", resdata);
+	// console.log("body", resdata[0]?.info?.name);
+	// console.log("body", resdata[0]?.info?.cuisine);
+
 	return resdata === null || filteredRestaurant == null ? (
 		<Shimmer />
 	) : (
-		<div className="body xl:w-[1280px] m-auto">
-			<div className="search-container px-5 my-10">
+		<div className="body px-5 xl:w-[1280px] m-auto h-full py-10 xl:py-20">
+			<div className="search-container flex flex-wrap items-center px-0 my-10">
 				<input
-					className="search-box border border-solid border-black pl-2"
+					className="search-box border border-solid border-black p-2 rounded-tl-lg rounded-bl-lg"
 					type="text"
 					placeholder="Search"
 					value={searchText}
 					onChange={e => setSearchText(e.target.value)}
 				/>
 				<button
-					className="search-button border border-solid border-black"
+					className="search-button border border-solid border-black px-4 py-2  border-l-0  rounded-tr-lg rounded-br-lg"
 					type="submit"
 					onClick={() => {
 						setFilteredRestaurant(
-							resdata?.filter(res =>
-								res?.info?.name
-									.toLowerCase()
-									.includes(searchText.toLowerCase())
+							resdata?.filter(
+								res =>
+									res?.info?.name
+										.toLowerCase()
+										.includes(searchText.toLowerCase()) ||
+									res?.info?.cuisines
+										?.join(" ")
+										.toLowerCase()
+										.includes(searchText.toLowerCase()) ||
+									res?.info?.locality
+										.toLowerCase()
+										.includes(searchText.toLowerCase())
 							)
 						);
+						setSearchText("");
 					}}>
-					Search
+					<i class="fa-solid fa-magnifying-glass"></i>
 				</button>
 				<button
-					className="top-rated px-2 ml-20 bg-green-600 text-white shadow"
+					className="top-rated p-2 ml-0 mt-10 sm:mt-0 sm:ml-20 rounded-lg bg-green-600 text-white shadow"
 					type="submit"
 					onClick={() => {
 						setFilteredRestaurant(
@@ -61,29 +71,36 @@ const Body = () => {
 					}}>
 					Top Rated Restaurants
 				</button>
+			</div>
 
-				<label>name : </label>
-				{/* <input
-					className="p-2 border"
-					value={name}
-					onChange={e => {
-						setUserName(e.target.value);
-					}}
-				/> */}
-			</div>
-			<div className="res-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-				{filteredRestaurant?.map(restaurant => (
-					<Link
-						key={restaurant?.info?.id}
-						to={"/restaurants/" + restaurant?.info?.id}>
-						{restaurant?.info?.aggregatedDiscountInfoV3 ? (
-							<RestaurantCardOffered resData={restaurant} />
-						) : (
-							<RestaurantCard resData={restaurant} />
-						)}
-					</Link>
-				))}
-			</div>
+			{filteredRestaurant && (
+				<div className="res-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
+					{filteredRestaurant?.map(restaurant => (
+						<Link
+							key={restaurant?.info?.id}
+							to={"/restaurants/" + restaurant?.info?.id}>
+							{restaurant?.info?.aggregatedDiscountInfoV3 ? (
+								<RestaurantCardOffered resData={restaurant} />
+							) : (
+								<RestaurantCard resData={restaurant} />
+							)}
+						</Link>
+					))}
+				</div>
+			)}
+			{filteredRestaurant.length == 0 && (
+				<div className="flex flex-col justify-center items-center h-full w-full py-10">
+					<img
+						alt="oops! no restaurant found"
+						src="https://tse1.mm.bing.net/th?id=OIP.dCYjOfpMyYr1FXc04GN3GQHaDA&pid=Api&P=0&h=180"
+					/>
+					<a href="/">
+						<button className="p-2 mt-10 rounded-lg bg-gray-200">
+							Try Different Restaurants
+						</button>
+					</a>
+				</div>
+			)}
 		</div>
 	);
 };
