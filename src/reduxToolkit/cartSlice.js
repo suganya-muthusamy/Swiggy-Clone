@@ -26,14 +26,6 @@ const cartSlice = createSlice({
 			localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
 		},
 
-		// loadCartFromLocalStorage: state => {
-		// 	const savedCartItems = JSON.parse(
-		// 		localStorage.getItem("cartItems")
-		// 	);
-		// 	if (savedCartItems) {
-		// 		state.cartItems = savedCartItems;
-		// 	}
-		// },
 		removeItems: (state, action) => {
 			const itemIndex = state.cartItems.findIndex(
 				item => item?.card?.info?.id === action.payload?.card?.info?.id

@@ -25,33 +25,36 @@ const RestaurantMenu = () => {
 		);
 	});
 
-	// console.log(categories);
-	// console.log("filtered", filteredCategories);
+	// to get title
+	const title = resInfo?.cards[0]?.card?.card?.text;
+
+	// to get few details
+	const details = resInfo?.cards[2]?.card?.card?.info;
+	console.log("details", details);
+
 	return (
 		<div className="res-menu-container w-full md:w-8/12 m-auto px-4 xl:px-0">
-			<div className="res-info py-4 border-b-2 flex justify-between items-center ">
-				<div>
-					<h1 className="font-bold text-2xl pb-2">
-						{resInfo?.cards[0]?.card?.card?.info?.name}
-					</h1>
-					<h2 className="font-light pb-2">
-						{resInfo?.cards[0]?.card?.card?.info?.cuisines.join(
-							" | "
-						)}
-					</h2>
-					<p className="pb-2">
-						{resInfo?.cards[0]?.card?.card?.info?.areaName}
-					</p>
+			<div className="res-info py-4  flex justify-between items-center ">
+				<h1 className="text-xl font-bold">{title}</h1>
+			</div>
+
+			<div className="my-6 border p-4 rounded-2xl shadow-lg ">
+				<p className="font-bold ">
+					<i class="fa-solid fa-star text-xs text-white rounded-full p-1 bg-green-700 mr-2"></i>
+					<span className="mr-1">{details?.avgRating}</span>(
+					{details.totalRatingsString}) .
+					<span className="mx-2">{details?.costForTwoMessage}</span>
+				</p>
+				<div className="cuisines my-2 text-orange-600 font-bold underline">
+					{details?.cuisines?.join(", ")}
 				</div>
-				<div className="border p-3 text-xs flex flex-col justify-center items-center">
-					<p className="bg-orange-600 py-1 px-2 text-white w-max rounded-lg mb-2">
-						*{resInfo?.cards[0]?.card?.card?.info?.avgRating}
+				<div>
+					<p className="my-2">
+						<span className="font-bold">Outlet -</span>{" "}
+						{details?.locality}
 					</p>
-					<p className="py-2 border-t-2 text-xs">
-						{
-							resInfo?.cards[0]?.card?.card?.info
-								?.totalRatingsString
-						}
+					<p className="font-bold my-2 text-sm">
+						{details?.sla?.slaString}
 					</p>
 				</div>
 			</div>
@@ -61,6 +64,7 @@ const RestaurantMenu = () => {
 					return (
 						<li key={category?.card?.card?.title}>
 							<RestaurantCategory
+								allCategories={categories}
 								data={category?.card?.card}
 								isActive={index === showIndex}
 								setShowIndex={() => {

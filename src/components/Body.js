@@ -23,48 +23,56 @@ const Body = () => {
 	if (onlineStatus == false) return <h1>You are offline</h1>;
 
 	console.log("body", resdata);
-	// console.log("body", resdata[0]?.info?.name);
-	// console.log("body", resdata[0]?.info?.cuisine);
 
 	return resdata === null || filteredRestaurant == null ? (
 		<Shimmer />
 	) : (
-		<div className="body px-5 xl:w-[1280px] m-auto h-full py-10 xl:py-20">
-			<div className="search-container flex flex-wrap items-center px-0 my-10">
-				<input
-					className="search-box border border-solid border-black p-2 rounded-tl-lg rounded-bl-lg"
-					type="text"
-					placeholder="Search"
-					value={searchText}
-					onChange={e => setSearchText(e.target.value)}
-				/>
-				<button
-					className="search-button border border-solid border-black px-4 py-2  border-l-0  rounded-tr-lg rounded-br-lg"
-					type="submit"
-					onClick={() => {
-						setFilteredRestaurant(
-							resdata?.filter(
-								res =>
-									res?.info?.name
-										.toLowerCase()
-										.includes(searchText.toLowerCase()) ||
-									res?.info?.cuisines
-										?.join(" ")
-										.toLowerCase()
-										.includes(searchText.toLowerCase()) ||
-									res?.info?.locality
-										.toLowerCase()
-										.includes(searchText.toLowerCase())
-							)
-						);
-						setSearchText("");
-					}}>
-					<i class="fa-solid fa-magnifying-glass"></i>
-				</button>
+		<div className="body px-5 xl:px-0 xl:w-[1280px] m-auto h-full py-10 ">
+			<div className="search-container flex flex-wrap items-center px-0 mb-10">
+				<form className="search-form flex items-center w-full sm:w-96">
+					<input
+						className="text-sm search-box border border-solid border-black p-2 rounded-tl-lg rounded-bl-lg w-full sm:w-80"
+						type="text"
+						placeholder="Search by Restaurant Name, Cuisine, Locality"
+						value={searchText}
+						onChange={e => setSearchText(e.target.value)}
+					/>
+					<button
+						className="search-button border border-solid border-black px-4 py-2 text-sm bg-orange-600 text-white  border-l-0  rounded-tr-lg rounded-br-lg"
+						type="submit"
+						onClick={e => {
+							e.preventDefault(),
+								setFilteredRestaurant(
+									resdata?.filter(
+										res =>
+											res?.info?.name
+												.toLowerCase()
+												.includes(
+													searchText.toLowerCase()
+												) ||
+											res?.info?.cuisines
+												?.join(" ")
+												.toLowerCase()
+												.includes(
+													searchText.toLowerCase()
+												) ||
+											res?.info?.locality
+												.toLowerCase()
+												.includes(
+													searchText.toLowerCase()
+												)
+									)
+								);
+							setSearchText("");
+						}}>
+						<i class="fa-solid fa-magnifying-glass"></i>
+					</button>
+				</form>
 				<button
 					className="top-rated p-2 ml-0 mt-10 sm:mt-0 sm:ml-20 rounded-lg bg-green-600 text-white shadow"
 					type="submit"
-					onClick={() => {
+					onClick={e => {
+						e.preventDefault();
 						setFilteredRestaurant(
 							resdata?.filter(res => res?.info?.avgRating > 4)
 						);

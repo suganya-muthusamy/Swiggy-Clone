@@ -15,7 +15,7 @@ const MenuItems = ({ menuItems }) => {
 		dispatch(removeItems(item));
 	};
 
-	console.log("cartItems", cartItems);
+	console.log("menuItems", menuItems);
 	return (
 		<div className="my-5">
 			{menuItems?.map(item => {
@@ -30,9 +30,15 @@ const MenuItems = ({ menuItems }) => {
 							<h1 className="font-bold text-md">
 								{item?.card?.info?.name}
 							</h1>
-							<h2 className="font-light text-sm">
-								₹ {item?.card?.info?.price / 100}
-							</h2>
+							{item?.card?.info?.defaultPrice ? (
+								<h2 className="font-light text-sm">
+									₹ {item?.card?.info?.defaultPrice / 100}
+								</h2>
+							) : (
+								<h2 className="font-light text-sm">
+									₹ {item?.card?.info?.price / 100}
+								</h2>
+							)}
 							<p className="text-xs my-4 hidden sm:block">
 								{item?.card?.info?.description}
 							</p>
@@ -47,7 +53,7 @@ const MenuItems = ({ menuItems }) => {
 								alt={item?.card?.info?.name}
 							/>
 							{isInCart ? (
-								<div className=" flex justify-between py-1 px-3 w-full max-w-[100px] -mt-4 bg-gray-800 rounded-md text-white text-bold cursor-pointer ">
+								<div className=" flex justify-between py-1 px-3 w-full max-w-[100px] -mt-4 bg-white shadow-md rounded-md text-green-500 text-lg text-bold cursor-pointer ">
 									<span
 										onClick={() => handleRemoveItems(item)}
 										className="cursor-pointer">
@@ -70,9 +76,9 @@ const MenuItems = ({ menuItems }) => {
 									onClick={() =>
 										handleAddItems({ ...item, quantity: 1 })
 									}
-									className="cursor-pointer p-1 w-full max-w-[100px] -mt-4 bg-gray-800 rounded-md text-white text-bold relative">
+									className="cursor-pointer p-1 w-full max-w-[100px] -mt-4 bg-white shadow-md rounded-md text-green-500 text-lg text-bold relative">
 									Add
-									<span className="absolute top-[-0.5rem] right-0 text-white p-0 sm:p-1">
+									<span className="absolute top-[-0.5rem] right-0 text-green-500 p-0 sm:p-1">
 										+
 									</span>
 								</button>

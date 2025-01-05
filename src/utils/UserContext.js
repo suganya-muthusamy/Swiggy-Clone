@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 const UserContext = createContext({
 	// default values
-	name: "suganya",
+	name: "Suganya M",
 });
 
 export default UserContext;

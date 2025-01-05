@@ -1,9 +1,18 @@
 import { useState } from "react";
 import MenuItems from "./MenuItems";
-const RestaurantCategory = ({ data, showIndex, setShowIndex, isActive }) => {
+
+const RestaurantCategory = ({
+	allCategories,
+	data,
+	showIndex,
+	setShowIndex,
+	isActive,
+}) => {
 	const handleClick = () => {
 		setShowIndex();
 	};
+
+	console.log(allCategories, "allCategories");
 	return (
 		<div className="py-4 border-b-8">
 			<div

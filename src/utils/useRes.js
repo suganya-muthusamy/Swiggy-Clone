@@ -18,7 +18,7 @@ const UseresData = () => {
 			?.infoWithStyle?.restaurants;
 		setresData(JSON_DATA);
 	};
-	// console.log("fetchData", resdata);
+	console.log("fetchData", resdata);
 	return resdata;
 };
 

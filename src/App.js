@@ -20,7 +20,7 @@ const AppLayout = () => {
 
 	const [userName, setUserName] = useState();
 	useEffect(() => {
-		setUserName("suganya anbu");
+		setUserName("Suganya M");
 	}, []);
 
 	if (onlineStatus === false)
@@ -51,6 +51,7 @@ const appRouter = createBrowserRouter([
 			{
 				path: "/cart",
 				element: (
+					// lazy loading to improve performance
 					<Suspense fallback={<h1>loading....</h1>}>
 						<Cart />
 					</Suspense>
