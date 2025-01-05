@@ -26,9 +26,9 @@ const Header = () => {
 				<div className="xl:w-[1280px] m-auto py-2 flex justify-between items-center">
 					<a href="/" className="logo-container">
 						<h1 className="text-5xl font-bold text-orange-600 ">
-							No More
+							Skip
 						</h1>
-						<h1 className="text-lg text-orange-600">Dishes</h1>
+						<h1 className="text-lg text-orange-600">The Kitchen</h1>
 					</a>
 					<div className="nav-items">
 						<h1
